@@ -1,0 +1,10 @@
+.thank-div{
+    position: absolute;
+    top: 50%;
+    left: 20%;
+}
+
+.thank-text{
+    font-size: 60px;
+    font-family: 'Raleway', sans-serif;
+}

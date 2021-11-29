@@ -1,0 +1,141 @@
+.pdp-page{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-family: 'Raleway', sans-serif;
+}
+
+.pdp-container{
+    display: grid;
+    grid-template-columns:  150px 45% 300px;
+    grid-template-areas: "small-images selected-image product-details";
+    grid-column-gap: 100px;
+}
+
+.main-image-container{
+    grid-area: selected-image;
+}
+
+.small-images-container{
+    grid-area: small-images;
+}
+
+.product-details-container{
+    grid-area: product-details;
+}
+
+.small-image{
+    cursor: pointer;
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+}
+
+.small-image:hover{
+    opacity: 70%;
+    border: 3px solid #282c34;
+}
+
+.main-image{
+    width: 100%;
+}
+
+.radio-label{
+    border: solid 1px #282c34;
+    padding: 4px 4px;
+    cursor: pointer;
+}
+
+.radio-btn{
+    display: none;
+}
+
+.radio-btn:checked + .radio-label{
+    /*border: solid 1px #282c34;*/
+    /*padding: 1px;*/
+    background-color: #282c34;
+    color: white;
+}
+
+.radio-container{
+    padding: 3px;
+}
+
+.radio-group-container{
+    display: flex;
+}
+
+.colored-label-pdp{
+    border: solid 1px #3d4044;
+    padding: 9px 25px;
+    cursor: pointer;
+}
+
+.colored-label-pdp:hover{
+    opacity: 50%;
+}
+
+.radio-btn:checked + .colored-label-pdp{
+    border: solid 3px #282c34;
+}
+
+.addToCart-btn{
+    cursor: pointer;
+    width: 100%;
+    height: 45px;
+    background-color: #5ece7b;
+    color: white;
+    border: none;
+}
+
+.outOfStock-btn{
+    cursor: pointer;
+    width: 100%;
+    height: 45px;
+    /*background-color: #5ece7b;*/
+    /*color: white;*/
+    /*border: none;*/
+    border: solid 1px #282c34;
+    cursor: not-allowed;
+}
+
+.brand-pdp{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 27px;
+
+}
+
+.product-name-pdp{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 27px;
+
+}
+
+.attribute-name-pdp{
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 18px;
+
+}
+
+.price-title-pdp{
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 18px;
+}
+
+.price-number-pdp{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 18px;
+
+}
