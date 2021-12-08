@@ -46,7 +46,7 @@ export default class App extends React.Component {
                             {this.state.categories.map(
                                 category => {
                                     return (
-                                        <Route path={"/" + category.name.toLowerCase()} >
+                                        <Route key={"/" + category.name.toLowerCase()} path={"/" + category.name.toLowerCase()} >
                                             <ListingPage key={category.name} category={category.name} />
                                         </Route>
                                     )

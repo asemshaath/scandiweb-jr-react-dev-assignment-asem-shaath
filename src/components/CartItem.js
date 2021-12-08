@@ -3,6 +3,9 @@ import {fetchTheQuery} from "../fetching";
 import getSymbolFromCurrency from "currency-symbol-map";
 import '../css/Cart.css'
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import PropTypes from "prop-types";
+
+
 
 export class CartItem extends Component {
 
@@ -15,6 +18,8 @@ export class CartItem extends Component {
         }
     }
 
+    // eslint requires me to change it to UNSAFE_componentWillMount() which is unsafe
+    // eslint-disable-next-line react/no-deprecated
     async componentWillMount(){
         let data = await this.getProduct(this.props.product.itemId);
         if (data.data.product) {
@@ -68,7 +73,7 @@ export class CartItem extends Component {
                 <div className='radio-btn-cart-group-container'>
                 {attribute.items.map(item=> {
                     return (
-                        <div className='radio-cart'>
+                        <div key={item.id + " " + attribute.name} className='radio-cart'>
                             <input className= 'radio-btn-cart' type='radio' id={item.id + " " + attribute.name}
                                    value={item.value} name={attribute.name + " " + productId+ " " + JSON.stringify(this.props.product.attributes)}
                                    checked={selectedAttributeItem==item.id}
@@ -132,27 +137,21 @@ export class CartItem extends Component {
                             )}
                         </p>
 
-                        {this.state.product.attributes.map((attribute, index)=>{
+                        {this.state.product.attributes.map(attribute=>{
                             return this.renderAttributes(attribute, this.props.product.itemId)
                         })}
-
                     </div>
-
                     <div className='rightSide'>
-
                         <div className='img-wrapper'>
                             <button className='plusBtn' onClick={() => addProduct(this.props.product.itemId, this.state.product.prices, this.props.product.attributes)}> + </button>
                             <p className='item-qty'>{productsToPurchase[this.props.itemIndex].qty}</p>
                             <button className='minusBtn' onClick={()=> decreaseProduct(this.props.product.itemId, this.props.product.attributes)}> - </button>
 
-                            <div className='left-arrow-img' onClick={()=> this.prevImage()}> <IoIosArrowBack/> </div>
+                            <div className= {this.state.product.gallery.length ===1? 'hidden':'left-arrow-img'} onClick={()=> this.prevImage()}> <IoIosArrowBack/> </div>
                             <img className='product-img' src={this.state.product.gallery[this.state.imageIndex]}/>
-                            <div className='right-arrow-img' onClick={()=> this.nextImage()}> <IoIosArrowForward/> </div>
+                            <div className= {this.state.product.gallery.length ===1? 'hidden':'right-arrow-img'} onClick={()=> this.nextImage()}> <IoIosArrowForward/> </div>
                         </div>
-
-
                     </div>
-
                 </div>
                     <hr/>
                 </>
@@ -162,4 +161,11 @@ export class CartItem extends Component {
             return <p>Loading............</p>
         }
     }
+}
+
+CartItem.propTypes = {
+    product: PropTypes.object,
+    cartContext: PropTypes.any,
+    currencyContext: PropTypes.any,
+    itemIndex: PropTypes.number
 }

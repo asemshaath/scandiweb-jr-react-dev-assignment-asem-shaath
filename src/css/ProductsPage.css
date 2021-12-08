@@ -96,3 +96,127 @@ body{
     line-height: 160%;
 
 }
+
+#plp-popup{
+    position: fixed;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+    z-index: 3;
+    min-height: 300px;
+    width: 60%;
+    top: 20%;
+    left: 20%;
+    right: 50%;
+}
+
+.plp-popup-container{
+    display: flex;
+    padding: 9px;
+}
+
+.plp-popup-left{
+    display: flex;
+    flex: 50%;
+    /*background-color: #5ece7b;*/
+    /*object-fit: cover;*/
+}
+
+.popup-img{
+    height: 300px;
+    width: 100%;
+    object-fit: contain;
+}
+
+.plp-popup-right{
+    display: flex;
+    flex-direction: column;
+    flex: 50%;
+    /*background-color: #61dafb;*/
+}
+
+#popup-cover{
+    /*display: none;*/
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #1D1F22;
+    height: 100%;
+    width: 100%;
+    opacity: 10%;
+    z-index: 2;
+}
+
+.plp-popup-header{
+    display: flex;
+    padding: 9px;
+    align-items: end;
+    justify-content: end;
+    font-size: 30px;
+}
+
+.plp-x-btn{
+    cursor: pointer;
+}
+
+.plp-x-btn:hover{
+    color: red;
+}
+
+.plp-popup-btns{
+    display: flex;
+    padding: 4px;
+}
+
+.plp-popup-btns-left{
+    flex: 50%;
+    padding-right: 30px;
+    padding-top: 10px;
+}
+
+.plp-popup-btns-right{
+    flex: 50%;
+    padding-right: 30px;
+    padding-top: 10px;
+}
+
+.view-details-btn-popup{
+    width: 100%;
+    height: 45px;
+    cursor: pointer;
+    color: #1D1F22;
+    border: 2px solid black;
+    background-color: white;
+}
+
+.view-details-btn-popup:hover{
+    color: white;
+    background-color: #1D1F22;
+}
+
+@media (orientation: portrait) {
+
+    #plp-popup{
+        top: 10px;
+    }
+    .plp-popup-container{
+        /*display: flex;*/
+        flex-direction: column;
+    }
+    .popup-img{
+        height: 50px;
+        width: 100%;
+    }
+    .wrapper{
+        align-items: center;
+        justify-content: center;
+    }
+
+    #colored-label-popup{
+        padding-right: 2px;
+    }
+
+    #radio-label-popup{
+        display: flex;
+    }
+}

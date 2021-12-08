@@ -2,6 +2,8 @@ import React from 'react'
 import {NavLink} from "react-router-dom";
 import '../css/Navbar.css'
 
+
+
 export class NavItem extends React.Component {
     render() {
         //border-bottom: 1px solid #000
@@ -12,7 +14,6 @@ export class NavItem extends React.Component {
                         color: isActive ? "#5ECE7B" : "black",
                         textDecoration: "none",
                         borderBottom: isActive? "2px solid #5ECE7B" : ""
-
                     })}
                     to={this.props.path}
                     activeClassName='active-tab'>
@@ -21,4 +22,9 @@ export class NavItem extends React.Component {
             </div>
         );
     }
+}
+
+NavItem.propTypes = {
+    path: String,
+    name: String
 }

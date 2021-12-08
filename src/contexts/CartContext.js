@@ -3,18 +3,34 @@ import _ from 'lodash';
 
 export const CartContext = createContext()
 
+
+
 class CartContextProvider extends Component {
 
-    state = {
-        productsToPurchase: [],
-        totalPrice:[]
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            productsToPurchase: [],
+            totalPrice:[]
+        }
     }
 
-    clearCart = ()=>{
+
+
+    getTotalQty() {
+        let totalQty = 0
+        for (let i =0; i< this.state.productsToPurchase.length; i++){
+            totalQty += this.state.productsToPurchase[i].qty
+        }
+        return totalQty
+    }
+
+    clearCart() {
         this.setState({productsToPurchase:[]})
     }
 
-    addProduct = (itemId, prices, givenAttributes) => {
+    addProduct(itemId, prices, givenAttributes) {
         let index = -1
 
         // find the index of the existing product
@@ -48,7 +64,7 @@ class CartContextProvider extends Component {
         }
     }
 
-    decreaseProduct = (itemId, givenAttributes) =>{
+    decreaseProduct(itemId, givenAttributes) {
         let index = -1
         // find the index of the existing product
         for (let i = 0; i < this.state.productsToPurchase.length; i++) {
@@ -88,7 +104,11 @@ class CartContextProvider extends Component {
 
     render() {
         return (
-            <CartContext.Provider value={{...this.state, addProduct: this.addProduct, decreaseProduct: this.decreaseProduct, clearCart: this.clearCart}}>
+            <CartContext.Provider value={{...this.state,
+                addProduct: this.addProduct.bind(this),
+                decreaseProduct: this.decreaseProduct.bind(this),
+                clearCart: this.clearCart.bind(this),
+                getTotalQty: this.getTotalQty.bind(this)}}>
                 {this.props.children}
             </CartContext.Provider>
         )
@@ -100,7 +120,7 @@ function getTotalAmount(productsToPurchase) {
     const totalPrice = []
 
     productsToPurchase.map((product, productIndex) =>{
-        product.price.map((price, priceIndex)=>{
+        product.price.map(price=>{
             if (productIndex === 0){
                 totalPrice.push({currency: price.currency, amount: price.amount * product.qty})
             } else {
@@ -114,6 +134,10 @@ function getTotalAmount(productsToPurchase) {
     })
 
     return totalPrice
+}
+
+CartContextProvider.propTypes = {
+    children: React.ReactNode,
 }
 
 export default CartContextProvider;

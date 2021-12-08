@@ -8,6 +8,7 @@ nav{
 .LeftSide{
     flex: 33%;
     display: flex;
+
 }
 
 .MiddleSide{
@@ -103,7 +104,6 @@ nav{
 .nav-tab-div{
     display: flex;
     padding: 15px;
-
 }
 
 .logo{
@@ -117,8 +117,8 @@ nav{
 
 #currency-selector-box{
     position: absolute;
-    top: 80px;
-    right: 7%;
+    top: 60px;
+    /*right: calc(width/3);*/
     z-index: 3;
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
     padding: 2px;
@@ -133,14 +133,12 @@ nav{
     font-size: 18px;
     line-height: 160%;
     padding: 15px;
-
 }
 
 .currency-option:hover{
     /*cursor: pointer;*/
     background-color: #1D1F22;
     color: white;
-
 }
 
 .top-footer{
@@ -194,7 +192,6 @@ nav{
     font-size: 14px;
     line-height: 120%;
     cursor: pointer;
-
 }
 
 .checkOutBtn-mini:hover{
@@ -204,4 +201,84 @@ nav{
 .viewBagBtn:hover{
     background-color: #1D1F22;
     color: white;
+}
+
+.currency-selector-btn-contanier{
+    /*position: center;*/
+    display: flex;
+    padding-right: 50px;
+}
+
+.nav-menu-icon{
+    display: none;
+}
+
+.phone-screen-menu{
+    position: absolute;
+    top: 80px;
+    /*z-index: 3;*/
+    background-color: white;
+}
+
+.all-tabs-contanier{
+    display: flex;
+}
+
+@media (orientation: portrait) {
+    .nav-menu-icon{
+        display: flex;
+        font-size: 40px;
+        color: #1D1F22;
+        padding-left: 10px;
+        cursor: pointer;
+    }
+
+    .LeftSide{
+        align-items: center;
+    }
+
+    .all-tabs-contanier{
+        /*display: none;*/
+    }
+    #not-hidden-links{
+        display: none;
+    }
+    #hidden-links{
+        position: absolute;
+        top: 80px;
+        width: 100%;
+        z-index: 3;
+        background-color: white;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 1px 100px 100px rgba(168, 172, 176, 0.59);
+    }
+
+    .logo{
+        width: 40px;
+    }
+
+    #cart-overlay{
+        /*position: absolute;*/
+        padding: 9px;
+        width: 0;
+        right:0;
+        min-width: 100%;
+        /*width: auto;*/
+        z-index: 3;
+        top: 80px;
+
+        min-height: 2rem;
+        overflow-y: scroll;
+        max-height: 22rem;
+    }
+
+    .miniCart-wrapper{
+        padding: 10px;
+    }
+
+    .minicart-footer{
+        width: 100%;
+        padding: 5px;
+    }
 }

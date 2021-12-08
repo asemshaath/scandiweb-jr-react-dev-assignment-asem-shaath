@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import '../css/Navbar.css'
 import '../css/Cart.css'
-import {Cart} from "../pages/Cart";
 import {CurrencyContext} from "../contexts/CurrencyContext";
 import {CartContext} from "../contexts/CartContext";
-import {CartItem} from "./CartItem";
 import getSymbolFromCurrency from "currency-symbol-map";
 import {Link} from "react-router-dom";
 import MiniCartItem from "./MiniCartItem";
@@ -66,8 +64,6 @@ class MiniCart extends Component {
                                                             })}
                                                             </p>
                                                         </div>
-
-
                                                     </div>
 
                                                     <div className='bottom-footer'>
@@ -84,11 +80,6 @@ class MiniCart extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
-
-
-
-
-
                                             </div>
                                         )
                                     }

@@ -20,11 +20,6 @@ export default class ListingPage extends React.Component {
 
 
     async componentDidMount(){
-        // let data = await this.getData(this.props.category)
-        // let products = data.data.category.products
-        // this.setState({products: products})
-
-        // let id = this.props.id;
         let data = await this.getData(this.props.category);
         if (data.data.category.products) {
             this.setState({products: data.data.category.products});
@@ -49,6 +44,16 @@ export default class ListingPage extends React.Component {
                         }
                         gallery
                         inStock
+                        attributes{
+                          id
+                          name
+                          type
+                          items{
+                            displayValue
+                            value
+                            id
+                          }
+                        }
                       }
                       }
                     }`, {title: category}
@@ -69,8 +74,8 @@ export default class ListingPage extends React.Component {
                     <h1 className='category-title'>{ this.capitalize(this.props.category)}</h1>
                     <div className="wrapper">
                         {this.state.products.map(
-                            (product, index) => {
-                                return <ItemCard key = {product.id} product={product} />
+                            product => {
+                                return <ItemCard key = {product.id} product={product} category = {this.props.category} />
                             }
                         )}
                     </div>
@@ -82,4 +87,8 @@ export default class ListingPage extends React.Component {
 
 
     }
+}
+
+ListingPage.propTypes = {
+    category: String,
 }

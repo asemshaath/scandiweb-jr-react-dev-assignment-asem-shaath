@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {fetchTheQuery} from "../fetching";
 import getSymbolFromCurrency from "currency-symbol-map";
-import {IoIosArrowBack, IoIosArrowForward} from "react-icons/io";
 import '../css/MiniCartItem.css'
+import PropTypes from "prop-types";
+
 
 class MiniCartItem extends Component {
 
@@ -15,7 +16,8 @@ class MiniCartItem extends Component {
         }
     }
 
-
+    // This requires to change it to UNSAFE_componentWillMount() which is unsafe
+    // eslint-disable-next-line react/no-deprecated
     async componentWillMount(){
         let data = await this.getProduct(this.props.product.itemId);
         if (data.data.product) {
@@ -69,7 +71,7 @@ class MiniCartItem extends Component {
                 <div className='radio-btn-cart-group-container-mini'>
                     {attribute.items.map(item=> {
                         return (
-                            <div className='radio-cart-mini'>
+                            <div key={item.id + " " + attribute.name + " mini"} className='radio-cart-mini'>
                                 <input className= 'radio-btn-cart-mini' type='radio' id={item.id + " " + attribute.name + " mini"}
                                        value={item.value} name={attribute.name + " " + productId+ " " + JSON.stringify(this.props.product.attributes) + " mini"}
                                        checked={selectedAttributeItem==item.id}
@@ -117,7 +119,7 @@ class MiniCartItem extends Component {
                                 )}
                             </p>
 
-                            {this.state.product.attributes.map((attribute, index)=>{
+                            {this.state.product.attributes.map(attribute=>{
                                 return this.renderAttributes(attribute, this.props.product.itemId)
                             })}
 
@@ -146,6 +148,14 @@ class MiniCartItem extends Component {
         }
     }
 
+}
+
+
+MiniCartItem.propTypes = {
+    product: PropTypes.object,
+    cartContext: PropTypes.any,
+    currencyContext: PropTypes.any,
+    itemIndex: PropTypes.number
 }
 
 export default MiniCartItem;

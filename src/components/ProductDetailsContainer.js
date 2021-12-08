@@ -2,7 +2,9 @@ import React, {Component} from 'react'
 import getSymbolFromCurrency from "currency-symbol-map"
 import {CartContext} from "../contexts/CartContext"
 import {CurrencyContext} from "../contexts/CurrencyContext"
+import parse from "html-react-parser";
 import '../css/PDP.css'
+import PropTypes from "prop-types";
 
 class ProductDetailsContainer extends Component {
     constructor(props) {
@@ -65,7 +67,7 @@ class ProductDetailsContainer extends Component {
                                                         <div className='radio-group-container'>
                                                             {attribute.items.map(item =>{
                                                                 return (
-                                                                    <div className='radio-container'>
+                                                                    <div key={"radio-container-" + attribute.name + "-" + item.id} className='radio-container'>
                                                                         <input  className='radio-btn'
 
                                                                                 type="radio" id={item.id + " " + attribute.name}
@@ -108,7 +110,8 @@ class ProductDetailsContainer extends Component {
                                                 }
                                             }}>  {!this.props.product.inStock? 'OUT OF STOCK': 'ADD TO CART'}</button>
 
-                                            <div dangerouslySetInnerHTML={{ __html: this.props.product.description }} />
+                                            {/*<div dangerouslySetInnerHTML={{ __html: this.props.product.description }} />*/}
+                                            <div>{ parse(this.props.product.description) }</div>
                                         </>
                                     )
                                 }}
@@ -137,6 +140,12 @@ class ProductDetailsContainer extends Component {
         }
         return this.state.selectedAttributes[index].item.value == value;
     }
+}
+
+
+ProductDetailsContainer.propTypes = {
+    product: PropTypes.object,
+    id: String
 }
 
 export default ProductDetailsContainer

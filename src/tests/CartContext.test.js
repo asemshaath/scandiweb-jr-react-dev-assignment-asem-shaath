@@ -20,7 +20,7 @@ class CartContextTest extends React.Component {
             <CartContextProvider>
                 <CartContext.Consumer>
                     {context=>{
-                        const {productsToPurchase, totalPrice, addProduct, decreaseProduct} = context
+                        const {productsToPurchase, addProduct, decreaseProduct} = context
 
                         return(<>
                             <input type='text' title='product-name'
@@ -42,13 +42,13 @@ class CartContextTest extends React.Component {
 
                             {/*This is should be changed once the Add button is clicked*/}
                             {productsToPurchase.map(product=>{
-                                return(<div>
+                                return(<div key={product.itemId + "-display-test" }>
                                     <h1 title={"Name " + product.itemId}>{product.itemId}</h1>
                                     <button title={"Plus " + product.itemId} onClick={()=>{addProduct(product.itemId, product.price, product.attributes)}}>+</button>
                                     <h1 title={"qty " + product.itemId}>{product.qty}</h1>
                                     <button title={"Minus " + product.itemId} onClick={()=>{decreaseProduct(product.itemId, product.attributes)}}>-</button>
                                     <>{product.price.map(price=>{
-                                        return(<h1 title={price.currency + " " + product.itemId}>{price.amount}</h1>)
+                                        return(<h1 key={price.currency + "-" + product.itemId +"-test"} title={price.currency + " " + product.itemId}>{price.amount}</h1>)
                                     })}</>
                                     <h1>{product.attributes}</h1>
                                 </div>)
@@ -62,8 +62,10 @@ class CartContextTest extends React.Component {
     }
 }
 
+// eslint-disable-next-line no-undef
 describe("Testing the ability to add and remove products from the cart", ()=>{
 
+    // eslint-disable-next-line no-undef
     it('Should add and remove products successfully', async ()=>{
 
         render(<CartContextTest/>)
@@ -75,51 +77,67 @@ describe("Testing the ability to add and remove products from the cart", ()=>{
 
         // Add iPhone XR
         fireEvent.change(nameInput, {target:{value: "iphone-xr"}})
+        // eslint-disable-next-line no-undef
         expect(nameInput.value).toBe("iphone-xr")
 
         fireEvent.change(usdInput, {target:{value: "600"}})
+        // eslint-disable-next-line no-undef
         expect(usdInput.value).toBe("600")
 
         fireEvent.change(eurInput, {target:{value: "500"}})
+        // eslint-disable-next-line no-undef
         expect(eurInput.value).toBe("500")
 
         fireEvent.change(attributeInput, {target:{value: "blue"}})
+        // eslint-disable-next-line no-undef
         expect(attributeInput.value).toBe("blue")
 
         fireEvent.click(addProductBtn)
 
+        // eslint-disable-next-line no-undef
         expect(screen.getByTitle("Name iphone-xr").innerHTML).toBe("iphone-xr")
+        // eslint-disable-next-line no-undef
         expect(screen.getByTitle("qty iphone-xr").innerHTML).toBe("1")
 
         fireEvent.click(screen.getByTitle("Plus iphone-xr"))
+        // eslint-disable-next-line no-undef
         expect(screen.getByTitle("qty iphone-xr").innerHTML).toBe("2")
 
         // Add iPhone 13
         fireEvent.change(nameInput, {target:{value: "iphone-13"}})
+        // eslint-disable-next-line no-undef
         expect(nameInput.value).toBe("iphone-13")
 
         fireEvent.change(usdInput, {target:{value: "1000"}})
+        // eslint-disable-next-line no-undef
         expect(usdInput.value).toBe("1000")
 
         fireEvent.change(eurInput, {target:{value: "900"}})
+        // eslint-disable-next-line no-undef
         expect(eurInput.value).toBe("900")
 
         fireEvent.change(attributeInput, {target:{value: "pro"}})
+        // eslint-disable-next-line no-undef
         expect(attributeInput.value).toBe("pro")
 
         fireEvent.click(addProductBtn)
 
+        // eslint-disable-next-line no-undef
         expect(screen.getByTitle("Name iphone-13").innerHTML).toBe("iphone-13")
+        // eslint-disable-next-line no-undef
         expect(screen.getByTitle("qty iphone-13").innerHTML).toBe("1")
 
         // remove all the products by (-) button
         fireEvent.click(screen.getByTitle("Minus iphone-13"))
+        // eslint-disable-next-line no-undef
         expect(screen.queryByText("Name iphone-13")).toBeNull()
 
         fireEvent.click(screen.getByTitle("Minus iphone-xr"))
+        // eslint-disable-next-line no-undef
         expect(screen.getByTitle("qty iphone-xr").innerHTML).toBe("1")
 
         fireEvent.click(screen.getByTitle("Minus iphone-xr"))
+        // eslint-disable-next-line no-undef
         expect(screen.queryByText("Name iphone-xr")).toBeNull()
     })
 })

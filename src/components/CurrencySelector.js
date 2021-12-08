@@ -27,28 +27,11 @@ export class CurrencySelector extends React.Component{
                 {(currencyContext) => {
                     const {setCurrency} =currencyContext
                     return(
-                        // <select name="currency-selector"
-                        //         onChange={event => {
-                        //                 setCurrency(event.target.value)
-                        //                 localStorage.setItem("currency", event.target.value)
-                        //         }}>
-                        //
-                        //     {this.state.currencies.map(
-                        //         (currency, index) => {
-                        //             return (
-                        //                 <option value={currency}>
-                        //                     {currency}
-                        //                 </option>
-                        //             )
-                        //         }
-                        //     )}
-                        // </select>
-
                         <>
                             {this.state.currencies.map(
-                                (currency, index) => {
+                                (currency) => {
                                     return (
-                                        <div className='currency-option' onClick={()=> setCurrency(currency)}>
+                                        <div key={currency} className='currency-option' onClick={()=> setCurrency(currency)}>
                                             { getSymbolFromCurrency(currency) + " " + currency}
                                         </div>
                                     )

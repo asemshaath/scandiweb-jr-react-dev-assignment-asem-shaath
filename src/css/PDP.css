@@ -6,22 +6,33 @@
 }
 
 .pdp-container{
-    display: grid;
-    grid-template-columns:  150px 45% 300px;
-    grid-template-areas: "small-images selected-image product-details";
-    grid-column-gap: 100px;
+    width: 100%;
+    display: flex;
+}
+
+.all-images-container{
+    flex: 70%;
+    display: flex;
+    gap: 50px;
 }
 
 .main-image-container{
-    grid-area: selected-image;
+    display: flex;
+    justify-content: center;
+    align-items: start;
 }
 
 .small-images-container{
-    grid-area: small-images;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: flex-start;
+    gap: 10px;
 }
 
 .product-details-container{
-    grid-area: product-details;
+    flex: 30%;
+    margin-right: 30px;
 }
 
 .small-image{
@@ -37,7 +48,9 @@
 }
 
 .main-image{
-    width: 100%;
+    height: 700px;
+    width: 85%;
+    object-fit: contain;
 }
 
 .radio-label{
@@ -138,4 +151,45 @@
     font-size: 24px;
     line-height: 18px;
 
+}
+
+@media (orientation: portrait) {
+
+    .pdp-container{
+        display: flex;
+        flex-direction: column;
+        padding: 9px;
+    }
+
+    .all-images-container{
+        flex-direction: column-reverse;
+    }
+    .small-images-container{
+        flex-direction: row;
+        /*width: 100%;*/
+        min-width: 10%;
+        overflow-y: scroll;
+        max-width: 90%;
+    }
+    .small-image{
+        cursor: pointer;
+        height: 70px;
+        width: 70px;
+        object-fit: cover;
+    }
+    .product-details-container{
+        margin-right: 0;
+    }
+
+    .main-image{
+        height: 300px;
+    }
+
+    .pdp-page{
+        padding: 9px;
+    }
+
+    .addToCart-btn{
+        width: 90%;
+    }
 }

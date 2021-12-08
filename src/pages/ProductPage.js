@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import '../css/PDP.css'
 import ProductDetailsContainer from "../components/ProductDetailsContainer";
 
+
 class ProductPage extends React.Component {
 
     constructor(props) {
@@ -65,16 +66,20 @@ class ProductPage extends React.Component {
                 <>
                 <div className="pdp-page">
                     <div className="pdp-container">
-                        <div className="small-images-container">
-                            {this.state.product.gallery.map((image, index) => {
-                                return (<img key={index} src={image} className="small-image"
-                                             onMouseOver={() => {this.setState({selectedImageIndex: index})}} />)
-                            })}
+
+                        <div className='all-images-container'>
+                            <div className="small-images-container">
+                                {this.state.product.gallery.map((image, index) => {
+                                    return (<img key={index} src={image} className="small-image"
+                                                 onMouseOver={() => {this.setState({selectedImageIndex: index})}} />)
+                                })}
+                            </div>
+
+                            <div className="main-image-container">
+                                <img src={ this.state.product.gallery[this.state.selectedImageIndex] } alt="product" className="main-image"/>
+                            </div>
                         </div>
 
-                        <div className="main-image-container">
-                            <img src={ this.state.product.gallery[this.state.selectedImageIndex] } alt="product" className="main-image"/>
-                        </div>
 
                         <div className="product-details-container">
                             <ProductDetailsContainer id={this.props.id} product={this.state.product}/>
@@ -87,6 +92,11 @@ class ProductPage extends React.Component {
             return ( <div>Loading....................................</div>)
         }
     }
+}
+
+
+ProductPage.propTypes = {
+    id: String
 }
 
 export default withRouter(props => <ProductPage {...props}/>)
