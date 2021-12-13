@@ -2,6 +2,7 @@ import React from "react";
 import {ItemCard} from "../components/ItemCard";
 import {fetchTheQuery} from "../fetching";
 import '../css/ProductsPage.css'
+import PropTypes from "prop-types";
 
 export default class ListingPage extends React.Component {
 
@@ -84,11 +85,9 @@ export default class ListingPage extends React.Component {
         }else {
             return ( <div>Loading....................................</div>)
         }
-
-
     }
 }
 
 ListingPage.propTypes = {
-    category: String,
+    category: PropTypes.string,
 }

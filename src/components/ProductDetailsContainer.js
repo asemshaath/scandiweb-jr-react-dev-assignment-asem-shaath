@@ -62,7 +62,7 @@ class ProductDetailsContainer extends Component {
 
                                             {this.props.product.attributes.map(attribute=>{
                                                 return (
-                                                    <>
+                                                    <div key={attribute.name+'-pdp-attributes'}>
                                                         <p className='attribute-name-pdp'>{attribute.name.toUpperCase() + ":"}</p>
                                                         <div className='radio-group-container'>
                                                             {attribute.items.map(item =>{
@@ -72,10 +72,11 @@ class ProductDetailsContainer extends Component {
 
                                                                                 type="radio" id={item.id + " " + attribute.name}
                                                                                 name={attribute.name + " "+ this.props.product.name} value={item.value}
-                                                                               onClick={()=>{
+                                                                               onChange={()=>{
                                                                                    this.setSelectedAttr(attribute, item)
                                                                                }}
                                                                                 checked={this.isAttributeSelected(attribute, item.value)}
+                                                                                key={"radio-container-" + attribute.name + "-" + item.id+'-pdp-radio-btn'}
                                                                         />
                                                                         <label className={attribute.type === 'swatch'? 'colored-label-pdp': 'radio-label'}
                                                                                htmlFor={item.id + " " + attribute.name}
@@ -87,20 +88,20 @@ class ProductDetailsContainer extends Component {
                                                                 )
                                                             })}
                                                         </div>
-                                                    </>
+                                                    </div>
                                                 )
                                             })}
 
                                             <p className='price-title-pdp'>PRICE:</p>
-                                            <p className='price-number-pdp'>
+                                            <div className='price-number-pdp'>
                                                 {this.props.product.prices.map(
                                                     price =>{
                                                         if (price.currency == selectedCurrency){
-                                                            return( <> { getSymbolFromCurrency(selectedCurrency) +" "+ price.amount }</> )
+                                                            return( <p key={price.currency+'-pdp-price'}> { getSymbolFromCurrency(selectedCurrency) +" "+ price.amount }</p> )
                                                         }
                                                     }
                                                 )}
-                                            </p>
+                                            </div>
 
                                             <button disabled={!this.props.product.inStock} className={!this.props.product.inStock? 'outOfStock-btn': 'addToCart-btn'} onClick={()=>{
                                                 if (this.isEverythingClicked()){
@@ -145,7 +146,7 @@ class ProductDetailsContainer extends Component {
 
 ProductDetailsContainer.propTypes = {
     product: PropTypes.object,
-    id: String
+    id: PropTypes.string
 }
 
 export default ProductDetailsContainer

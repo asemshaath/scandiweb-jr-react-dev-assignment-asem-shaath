@@ -3,6 +3,7 @@ import {fetchTheQuery} from "../fetching";
 import { withRouter } from 'react-router-dom'
 import '../css/PDP.css'
 import ProductDetailsContainer from "../components/ProductDetailsContainer";
+import PropTypes from "prop-types";
 
 
 class ProductPage extends React.Component {
@@ -63,14 +64,14 @@ class ProductPage extends React.Component {
             )
         } else if(isImageAvailable) {
             return(
-                <>
+
                 <div className="pdp-page">
                     <div className="pdp-container">
 
                         <div className='all-images-container'>
                             <div className="small-images-container">
                                 {this.state.product.gallery.map((image, index) => {
-                                    return (<img key={index} src={image} className="small-image"
+                                    return (<img key={index+'-pdp-small-image'} src={image} className="small-image"
                                                  onMouseOver={() => {this.setState({selectedImageIndex: index})}} />)
                                 })}
                             </div>
@@ -86,7 +87,6 @@ class ProductPage extends React.Component {
                         </div>
                     </div>
                 </div>
-                </>
             )
         } else {
             return ( <div>Loading....................................</div>)
@@ -96,7 +96,7 @@ class ProductPage extends React.Component {
 
 
 ProductPage.propTypes = {
-    id: String
+    id: PropTypes.string
 }
 
 export default withRouter(props => <ProductPage {...props}/>)

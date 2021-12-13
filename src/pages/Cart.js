@@ -38,24 +38,22 @@ export class Cart extends React.Component {
                                         <>
                                         {productsToPurchase && productsToPurchase.map((product, index) =>{
                                         return(
-                                            <>
                                             <CartItem key = {product.itemId + " " + index}
                                                       product = {product}
                                                       cartContext = {cartContext}
                                                       currencyContext = {currencyContext}
-                                                      itemIndex={index}/>
-                                            </>
+                                                      itemIndex={index}
+                                            />
                                         )})}
 
                                             <div className='cart-footer'>
-
                                                 <div className='left-cart-footer'>
-                                                    <h3>Your Total is { totalPrice && totalPrice.map(price =>{
+                                                    <div>Your Total is { totalPrice && totalPrice.map(price =>{
                                                         if (price.currency == selectedCurrency){
-                                                            return( <> { getSymbolFromCurrency(selectedCurrency) +  price.amount.toLocaleString() }</> )
+                                                            return( <h3 key={price.currency+'-cart-price'}> { getSymbolFromCurrency(selectedCurrency) +  price.amount.toLocaleString() }</h3> )
                                                         }
                                                     })}
-                                                    </h3>
+                                                    </div>
                                                 </div>
 
                                                 <div className='right-cart-footer'>
@@ -63,10 +61,7 @@ export class Cart extends React.Component {
                                                         <button className='check-out-btn' onClick={()=> clearCart()}>CHECK OUT</button>
                                                     </Link>
                                                 </div>
-
                                             </div>
-
-
                                         </>
                                     )
                                 }

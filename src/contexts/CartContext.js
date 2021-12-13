@@ -1,5 +1,6 @@
 import React, {Component, createContext} from "react"
 import _ from 'lodash';
+import PropTypes from "prop-types";
 
 export const CartContext = createContext()
 
@@ -137,7 +138,7 @@ function getTotalAmount(productsToPurchase) {
 }
 
 CartContextProvider.propTypes = {
-    children: React.ReactNode,
+    children: PropTypes.node,
 }
 
 export default CartContextProvider;

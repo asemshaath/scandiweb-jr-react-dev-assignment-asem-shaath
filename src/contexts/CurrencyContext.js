@@ -1,4 +1,5 @@
 import React, {Component, createContext} from "react"
+import PropTypes from "prop-types";
 
 export const CurrencyContext = createContext()
 
@@ -25,7 +26,7 @@ class CurrencyContextProvider extends Component {
 }
 
 CurrencyContextProvider.propTypes = {
-    children: React.ReactNode
+    children: PropTypes.node
 }
 
 export default CurrencyContextProvider;

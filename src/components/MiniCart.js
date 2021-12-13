@@ -18,7 +18,6 @@ class MiniCart extends Component {
 
     render() {
         return (
-            <>
                 <CurrencyContext.Consumer>
                     {currencyContext =>(
                         <CartContext.Consumer>
@@ -40,15 +39,14 @@ class MiniCart extends Component {
 
                                                 {productsToPurchase && productsToPurchase.map((product, index) =>{
                                                     return(
-                                                        <>
-                                                            <MiniCartItem key = {product.itemId + " " + index}
-                                                                      product = {product}
-                                                                      cartContext = {cartContext}
-                                                                      currencyContext = {currencyContext}
-                                                                      itemIndex={index}/>
-                                                        </>
+                                                        <MiniCartItem
+                                                            key = {product.itemId + " " + index}
+                                                            product = {product}
+                                                            cartContext = {cartContext}
+                                                            currencyContext = {currencyContext}
+                                                            itemIndex={index}
+                                                        />
                                                     )})}
-
                                                 <div className='minicart-footer'>
                                                     <div className='top-footer'>
 
@@ -57,12 +55,12 @@ class MiniCart extends Component {
                                                         </div>
 
                                                         <div className='top-right-footer'>
-                                                            <p className='totalPrice-mini'>{ totalPrice && totalPrice.map(price =>{
+                                                            <div className='totalPrice-mini'>{ totalPrice && totalPrice.map(price =>{
                                                                 if (price.currency == selectedCurrency){
-                                                                    return( <> { getSymbolFromCurrency(selectedCurrency) +  price.amount.toLocaleString() }</> )
+                                                                    return( <p key={price.currency+'-mini-cart-price'}> { getSymbolFromCurrency(selectedCurrency) +  price.amount.toLocaleString() }</p> )
                                                                 }
                                                             })}
-                                                            </p>
+                                                            </div>
                                                         </div>
                                                     </div>
 
@@ -88,9 +86,6 @@ class MiniCart extends Component {
                         </CartContext.Consumer>
                     )}
                 </CurrencyContext.Consumer>
-
-                {/*<Cart/>*/}
-            </>
         );
     }
 }

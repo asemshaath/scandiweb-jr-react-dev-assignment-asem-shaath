@@ -67,7 +67,7 @@ export class CartItem extends Component {
         }
 
         return (
-            <>
+            <div key={attribute.name + '-cart-item-rendered-attr'}>
                 <h5>{attribute.name.toUpperCase() + ":"}</h5>
 
                 <div className='radio-btn-cart-group-container'>
@@ -77,6 +77,8 @@ export class CartItem extends Component {
                             <input className= 'radio-btn-cart' type='radio' id={item.id + " " + attribute.name}
                                    value={item.value} name={attribute.name + " " + productId+ " " + JSON.stringify(this.props.product.attributes)}
                                    checked={selectedAttributeItem==item.id}
+                                   onChange={()=>{}}
+                                   key={item.id + " " + attribute.name+ ' cart-item-radio-btn'}
                             />
                             <label
                                 className={attribute.type === 'swatch'? 'colored-label-cart': 'radio-label-cart'}
@@ -87,7 +89,7 @@ export class CartItem extends Component {
                     )
                 })}
                 </div>
-            </>
+            </div>
         )
     }
 
@@ -127,15 +129,15 @@ export class CartItem extends Component {
                         <p className='brand-txt'> {this.state.product.brand} </p>
                         <p className='name-txt'> {this.state.product.name} </p>
 
-                        <p className='price-txt'>
+                        <div className='price-txt'>
                             { this.state.product.prices && this.state.product.prices.map(
                                 price =>{
                                     if (price.currency == selectedCurrency){
-                                        return( <> { getSymbolFromCurrency(selectedCurrency) +" "+ price.amount.toLocaleString() }</> )
+                                        return( <p key={price.currency+'-cart-item-price'}> { getSymbolFromCurrency(selectedCurrency) +" "+ price.amount.toLocaleString() }</p> )
                                     }
                                 }
                             )}
-                        </p>
+                        </div>
 
                         {this.state.product.attributes.map(attribute=>{
                             return this.renderAttributes(attribute, this.props.product.itemId)

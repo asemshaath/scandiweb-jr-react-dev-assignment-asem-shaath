@@ -1,8 +1,7 @@
 import React from 'react'
 import {NavLink} from "react-router-dom";
 import '../css/Navbar.css'
-
-
+import PropTypes from "prop-types";
 
 export class NavItem extends React.Component {
     render() {
@@ -25,6 +24,6 @@ export class NavItem extends React.Component {
 }
 
 NavItem.propTypes = {
-    path: String,
-    name: String
+    path: PropTypes.string,
+    name: PropTypes.string
 }

@@ -73,7 +73,6 @@ class PlpPopup extends Component {
                     </div>
 
                     <div className='plp-popup-right'>
-
                         <CartContext.Consumer>
                             {cartContext=>{
 
@@ -83,7 +82,7 @@ class PlpPopup extends Component {
                                         <h1>{this.props.product.name}</h1>
                                         {this.props.product.attributes.map(attribute=>{
                                             return (
-                                                <>
+                                                <div key={attribute.name+'-plp-popup-attribute'}>
                                                     <p className='attribute-name-pdp'>{attribute.name.toUpperCase() + ":"}</p>
                                                     <div className='radio-group-container'>
                                                         {attribute.items.map(item =>{
@@ -92,10 +91,11 @@ class PlpPopup extends Component {
                                                                     <input  className='radio-btn'
                                                                             type="radio" id={item.id + " " + attribute.name}
                                                                             name={attribute.name + " "+ this.props.product.name} value={item.value}
-                                                                            onClick={()=>{
+                                                                            onChange={()=>{
                                                                                 this.setSelectedAttr(attribute, item)
                                                                             }}
                                                                             checked={this.isAttributeSelected(attribute, item.value)}
+                                                                            key={"plp-popup-" + attribute.name + "-" + item.id+'-plp-popup-radio-btn'}
                                                                     />
                                                                     <label className={attribute.type === 'swatch'? 'colored-label-pdp': 'radio-label'}
                                                                            id={attribute.type === 'swatch'? 'colored-label-popup': 'radio-label-popup'}
@@ -108,19 +108,15 @@ class PlpPopup extends Component {
                                                             )
                                                         })}
                                                     </div>
-                                                </>
+                                                </div>
                                             )
                                         })}
 
-
                                         <div className='plp-popup-btns'>
-
                                             <div className='plp-popup-btns-left'>
-
                                                 <Link to={`/product/${this.props.product.id}`}>
                                                     <button className='view-details-btn-popup'> VIEW DETAILS </button>
                                                 </Link>
-
                                             </div>
 
                                             <div className='plp-popup-btns-right' >

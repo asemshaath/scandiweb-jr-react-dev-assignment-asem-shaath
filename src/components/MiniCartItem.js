@@ -12,7 +12,6 @@ class MiniCartItem extends Component {
         this.state={
             product: null,
             failedToLoad: false,
-
         }
     }
 
@@ -65,7 +64,7 @@ class MiniCartItem extends Component {
         }
 
         return (
-            <>
+            <div key={attribute.name + '-mini-cart-item-rendered-attr'}>
                 <h5>{attribute.name.toUpperCase() + ":"}</h5>
 
                 <div className='radio-btn-cart-group-container-mini'>
@@ -75,6 +74,8 @@ class MiniCartItem extends Component {
                                 <input className= 'radio-btn-cart-mini' type='radio' id={item.id + " " + attribute.name + " mini"}
                                        value={item.value} name={attribute.name + " " + productId+ " " + JSON.stringify(this.props.product.attributes) + " mini"}
                                        checked={selectedAttributeItem==item.id}
+                                       onChange={()=>{}}
+                                       key={item.id + "-" + attribute.name + "-mini-cart-item-radio-btn"}
                                 />
                                 <label
                                     className={attribute.type === 'swatch'? 'colored-label-mini': 'radio-label-mini'}
@@ -85,7 +86,7 @@ class MiniCartItem extends Component {
                         )
                     })}
                 </div>
-            </>
+            </div>
         )
     }
 
@@ -102,22 +103,21 @@ class MiniCartItem extends Component {
         else if (productFetched){
 
             return(
-                <>
+                <div>
                     <div className='cart-item-container-mini'>
-
                         <div className='leftSide-mini'>
                             <p className='brand-txt-mini'> {this.state.product.brand} </p>
                             <p className='name-txt-mini'> {this.state.product.name} </p>
 
-                            <p className='price-txt-mini'>
+                            <div className='price-txt-mini'>
                                 { this.state.product.prices && this.state.product.prices.map(
                                     price =>{
                                         if (price.currency == selectedCurrency){
-                                            return( <> { getSymbolFromCurrency(selectedCurrency) +" "+ price.amount.toLocaleString() }</> )
+                                            return( <p key={price.currency+'-mini-cart-item-price'}> { getSymbolFromCurrency(selectedCurrency) +" "+ price.amount.toLocaleString() }</p> )
                                         }
                                     }
                                 )}
-                            </p>
+                            </div>
 
                             {this.state.product.attributes.map(attribute=>{
                                 return this.renderAttributes(attribute, this.props.product.itemId)
@@ -126,7 +126,6 @@ class MiniCartItem extends Component {
                         </div>
 
                         <div className='rightSide-mini'>
-
                             <div className='img-wrapper-mini'>
                                 <button className='plusBtn-mini' onClick={() => addProduct(this.props.product.itemId, this.state.product.prices, this.props.product.attributes)}> + </button>
                                 <p className='item-qty-mini'>{productsToPurchase[this.props.itemIndex].qty}</p>
@@ -134,13 +133,11 @@ class MiniCartItem extends Component {
 
                                 <img className='product-img-mini' src={this.state.product.gallery[0]}/>
                             </div>
-
-
                         </div>
 
                     </div>
                     <hr/>
-                </>
+                </div>
             )
         }
         else {

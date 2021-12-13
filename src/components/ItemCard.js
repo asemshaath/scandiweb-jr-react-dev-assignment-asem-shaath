@@ -40,22 +40,26 @@ export class ItemCard extends React.Component {
                                              className={this.props.product.inStock? 'card-image': 'card-image-out-of-stock'}/>
 
                                         <p className='outOfStock-txt'>{this.props.product.inStock? '': 'OUT OF STOCK'}</p>
-                                        <Link to={this.props.category}>
-                                            <div className={this.state.cartButtonIsVisible? 'cart-icon-in-card-div': 'hidden'}>
-                                                <button className={this.state.cartButtonIsVisible? 'cart-icon-in-card': 'hidden'}
-                                                        onClick={()=>{this.setState({popupIsVisible: !this.state.popupIsVisible})}}>
-                                                    <AiOutlineShoppingCart/>
-                                                </button>
-                                            </div>
-                                        </Link>
+
+                                        <div>
+                                            <Link to={this.props.category}>
+                                                <div className={this.state.cartButtonIsVisible? 'cart-icon-in-card-div': 'hidden'}>
+                                                    <button className={this.state.cartButtonIsVisible? 'cart-icon-in-card': 'hidden'}
+                                                            onClick={()=>{this.setState({popupIsVisible: !this.state.popupIsVisible})}}>
+                                                        <AiOutlineShoppingCart/>
+                                                    </button>
+                                                </div>
+                                            </Link>
+                                        </div>
+
                                         <p className="card-title">{this.props.product.brand + " " + this.props.product.name}</p>
-                                        <h5 className="card-price">
+                                        <div className="card-price">
                                             {this.props.product.prices && this.props.product.prices.map(price =>{
                                                 if (price.currency == selectedCurrency){
-                                                    return( <> { getSymbolFromCurrency(selectedCurrency) +" "+ price.amount.toLocaleString() }</> )
+                                                    return( <h5 key={price.currency+'-item-card-price'}> { getSymbolFromCurrency(selectedCurrency) +" "+ price.amount.toLocaleString() }</h5> )
                                                 }
                                             })}
-                                        </h5>
+                                        </div>
 
                                     </div>
                                 </div>
@@ -81,5 +85,5 @@ export class ItemCard extends React.Component {
 
 ItemCard.propTypes = {
     product: PropTypes.object,
-    category: String
+    category: PropTypes.string
 }

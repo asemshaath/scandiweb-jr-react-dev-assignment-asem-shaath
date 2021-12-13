@@ -27,20 +27,19 @@ export default class Navbar extends Component {
 
     render() {
         return (
-            <>
                 <nav>
                     <div className='LeftSide'>
                         <div className='all-tabs-contanier' id={this.state.phoneScreenMenuIsOpen? 'not-hidden-links': 'hidden-links'} >
                             {this.props.categories.map(
-                                category => {
+                                (category,index) => {
                                     return (
-                                        <>
-                                            <div className='nav-tabs-container' onClick={()=> {
+                                        <div key={'nav-tabs-container-div-'+index}>
+                                            <div key={'nav-tabs-container-'+index} className='nav-tabs-container' onClick={()=> {
                                                 this.setState({phoneScreenMenuIsOpen: true})
                                             }}>
-                                                <NavItem name={category.name} path={"/"+category.name.toLowerCase()} />
+                                                <NavItem key={category.name+'-nav-item'} name={category.name} path={"/"+category.name.toLowerCase()} />
                                             </div>
-                                        </>
+                                        </div>
                                     )
                                 }
                             )}
@@ -55,9 +54,6 @@ export default class Navbar extends Component {
                         <Link style={{width: "100%", justifyContent:"center", alignItems:"center", display:"flex"}} to = {"/"}>
                             <img className='logo' src={logo}/>
                         </Link>
-
-
-
                     </div>
 
                     <div className='RightSide'>
@@ -83,24 +79,20 @@ export default class Navbar extends Component {
                             }}
                         </CurrencyContext.Consumer>
 
-
-
                         <CartContext.Consumer>
                             {cartContext=>{
                                 const {productsToPurchase, getTotalQty} = cartContext
 
-                                return(<>
+                                return(
                                     <div className='MiniCart-btn' onClick={()=>{this.setState({cartOverlayIsOpen: !this.state.cartOverlayIsOpen})}}>
                                         <AiOutlineShoppingCart/>
-                                        <>
-                                            <div className='cart-btn-badge' style={ productsToPurchase.length ==0? {display: "none"}: {}}>
-                                                <h4 className='cart-btn-badge-text'>
-                                                    {getTotalQty()}
-                                                </h4>
-                                            </div>
-                                        </>
+                                        <div className='cart-btn-badge' style={ productsToPurchase.length ==0? {display: "none"}: {}}>
+                                            <h4 className='cart-btn-badge-text'>
+                                                {getTotalQty()}
+                                            </h4>
+                                        </div>
                                     </div>
-                                </>)
+                                )
                             }}
                         </CartContext.Consumer>
 
@@ -115,12 +107,11 @@ export default class Navbar extends Component {
                         <MiniCart/>
                     </div>
                 </nav>
-            </>
         )
     }
 }
 
 
 Navbar.propTypes = {
-    categories: PropTypes.array,
+    categories: PropTypes.array
 }
